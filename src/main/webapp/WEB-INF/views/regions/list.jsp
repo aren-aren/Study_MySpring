@@ -23,6 +23,7 @@
 					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="/regions/list">Regions</a></li>
 					<li class="nav-item"><a class="nav-link" href="/departments/list">Departments</a></li>
+					<li class="nav-item"><a class="nav-link" href="/countries/list">Countries</a></li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dropdown link </a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Action</a></li>
@@ -45,7 +46,8 @@
 		<tbody>
 			<c:forEach items="${ requestScope.list }" var="dto">
 				<tr>
-					<td>${ pageScope.dto.region_id }</td><td>${ pageScope.dto.region_name }</td>
+					<td>${ pageScope.dto.region_id }</td>
+					<td><a href="/regions/detail?region_id=${ dto.region_id }">${ pageScope.dto.region_name }</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

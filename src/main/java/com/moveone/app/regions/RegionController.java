@@ -24,4 +24,17 @@ public class RegionController {
 		return "regions/list";
 	}
 	
+	@RequestMapping(value="detail", method=RequestMethod.GET)
+	public String detail(HttpServletRequest request) throws Exception {
+		RegionDAO dao = new RegionDAO();
+		RegionDTO dto = new RegionDTO();
+		
+		String id = request.getParameter("region_id");
+		dto.setRegion_id(Integer.valueOf(id));
+		
+		dto = dao.getDetail(dto);
+		request.setAttribute("dto", dto);
+		
+		return "regions/detail";
+	}
 }
