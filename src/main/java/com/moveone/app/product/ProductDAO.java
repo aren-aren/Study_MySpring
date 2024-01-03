@@ -15,12 +15,13 @@ public class ProductDAO {
 		String sql = "SELECT * FROM PRODUCT";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
-		ProductDTO dto = new ProductDTO();
 		List<ProductDTO> ar = new ArrayList<ProductDTO>();
-		if(rs.next()) {
+		while(rs.next()) {
+			
+			ProductDTO dto = new ProductDTO();
 			dto.setProductNum(rs.getLong("productNum"));
 			dto.setProductName(rs.getString("productName"));
-			dto.setProductContents(rs.getString("productNontents"));
+			dto.setProductContents(rs.getString("productContents"));
 			dto.setProductRate(rs.getDouble("productRate"));
 			dto.setProductJumsu(rs.getDouble("productJumsu"));
 			ar.add(dto);
@@ -33,11 +34,12 @@ public class ProductDAO {
 	
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception {
 		Connection con = DBConnector.getConnector();
-		String sql = "SELECT * FROM WHERE = PRODUCTNUM = ?";
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCTNUM = ?";
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setLong(1, productDTO.getProductNum());
-		ResultSet rs = st.executeQuery();
 		
+		ResultSet rs = st.executeQuery();
+		rs.next();
 		productDTO.setProductContents(rs.getString("productContents"));
 		productDTO.setProductJumsu(rs.getDouble("productJumsu"));
 		productDTO.setProductName(rs.getString("productName"));
