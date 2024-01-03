@@ -25,7 +25,7 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>${dto.getProductNum() }</td>
-					<td><a href="detail?productName=${dto.getProductNum() }">${dto.getProductName() }</a></td>
+					<td><a href="detail?productNum=${dto.getProductNum() }">${dto.getProductName() }</a></td>
 					<td>${dto.getProductContents() }</td>
 					<td>${dto.getProductRate() }</td>
 					<td>${dto.getProductJumsu() }</td>

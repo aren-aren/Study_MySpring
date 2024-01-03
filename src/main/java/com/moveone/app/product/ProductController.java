@@ -17,7 +17,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
-	public String list(Model model) {
+	public String list(Model model) throws Exception {
 		List<ProductDTO> list = productDAO.getList();
 		model.addAttribute("list", list);
 		
@@ -25,7 +25,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="detail", method=RequestMethod.GET)
-	public String detail(Long productNum, Model model) {
+	public String detail(Long productNum, Model model) throws Exception {
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setProductNum(productNum);
 		
