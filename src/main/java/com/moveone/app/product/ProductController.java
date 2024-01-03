@@ -1,5 +1,7 @@
 package com.moveone.app.product;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +18,21 @@ public class ProductController {
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String list(Model model) {
+		List<ProductDTO> list = productDAO.getList();
+		model.addAttribute("list", list);
 		
-		return "";
+		return "products/list";
 	}
-	
+
 	@RequestMapping(value="detail", method=RequestMethod.GET)
 	public String detail(Long productNum, Model model) {
-		return "";
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setProductNum(productNum);
+		
+		productDTO = productDAO.getDetail(productDTO);
+		
+		model.addAttribute("dto", productDTO);
+		
+		return "products/detail";
 	}
 }

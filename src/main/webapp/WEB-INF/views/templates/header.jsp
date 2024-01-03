@@ -9,7 +9,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="/regions/list">Regions</a></li>
+					<li class="nav-item"><a class="nav-link" href="/products/list">Products</a></li>
 					<li class="nav-item"><a class="nav-link" href="/departments/list">Departments</a></li>
 					<li class="nav-item"><a class="nav-link" href="/countries/list">Countries</a></li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dropdown link </a>
