@@ -5,8 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/regions/*")
@@ -17,16 +20,8 @@ public class RegionController {
 		this.dao = new RegionDAO();
 	}
 	
-	
 	@RequestMapping(value="add", method=RequestMethod.POST)
-	public String add(HttpServletRequest request) throws Exception {
-		String id = request.getParameter("region_id");
-		String name = request.getParameter("region_name");
-		
-		RegionDTO dto = new RegionDTO();
-		dto.setRegion_id(Integer.valueOf(id));
-		dto.setRegion_name(name);
-		
+	public String add(RegionDTO dto, Model model) throws Exception {
 		int result = dao.add(dto);
 		
 		String msg = "등록 실패";
@@ -35,8 +30,11 @@ public class RegionController {
 			msg = "등록성공";
 		}
 		
-		request.setAttribute("msg", msg);
-		request.setAttribute("path", "./list");
+//		request.setAttribute("msg", msg);
+//		request.setAttribute("path", "./list"); 
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("path", "./list");
 		
 		return "commons/result";
 	}
@@ -47,26 +45,30 @@ public class RegionController {
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(HttpServletRequest request) throws Exception {
-		System.out.println(request);
+	public ModelAndView list() throws Exception {
 		System.out.println("Regions List");
+		
+		ModelAndView mv = new ModelAndView();
 		
 		List<RegionDTO> list = dao.getList();
 		
-		request.setAttribute("list", list);
-		
-		return "regions/list";
+//		request.setAttribute("list", list);
+		mv.addObject("list", list);
+		mv.setViewName("regions/list");
+		return mv;
 	}
 	
 	@RequestMapping(value="detail", method=RequestMethod.GET)
-	public String detail(HttpServletRequest request) throws Exception {
+	//파라미터의 이름과 타입을 동일하게 선언
+	public String detail(Integer region_id, Model model) throws Exception {
 		RegionDTO dto = new RegionDTO();
 		
-		String id = request.getParameter("region_id");
-		dto.setRegion_id(Integer.valueOf(id));
+		dto.setRegion_id(region_id);
 		
 		dto = dao.getDetail(dto);
-		request.setAttribute("dto", dto);
+		//request.setAttribute("dto", dto);
+		//Model과 request의 라이프사이클이 동일
+		model.addAttribute("dto", dto);
 		
 		return "regions/detail";
 	}
