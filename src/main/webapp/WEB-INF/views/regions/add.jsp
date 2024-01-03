@@ -1,9 +1,5 @@
-<%@page import="com.moveone.app.regions.RegionDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -34,31 +30,25 @@
 			</div>
 		</div>
 	</nav>
-	<h1>Regions List</h1>
+	<section id="contents" class="container-fluid">
+		<div class="row mt-4">
+			<form action="/regions/add" method="post">
+				<div class="mb-3">
+					<label for="region-id" class="form-label">Region ID</label> 
+					<input type="text" class="form-control" id="region-id" name="region_id" placeholder="Region Id">
+					<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+				</div>
+				<div class="mb-3">
+					<label for="region-name" class="form-label">Region Name</label> 
+					<input type="text" class="form-control" id="region-name" name="region_name" placeholder="Region Name">
+				</div>
+				<button type="submit" class="btn btn-primary">Add</button>
+			</form>
+		</div>
+	</section>
 
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>NAME</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${ requestScope.list }" var="dto">
-				<tr>
-					<td>${ pageScope.dto.region_id }</td>
-					<td><a href="/regions/detail?region_id=${ dto.region_id }">${ pageScope.dto.region_name }</a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-		<tfoot>
 
-		</tfoot>
-	</table>
-	<a class="btn btn-outline-secondary" href="/regions/add">Add</a>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-		
-	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
