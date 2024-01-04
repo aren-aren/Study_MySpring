@@ -5,4 +5,15 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!-- 객체를 생성, 주입 -->
+	<bean class="com.moveone.app.ioc.LeftArm" id="leftArm"></bean>
+	<bean class="com.moveone.app.ioc.RightArm" id="rightArm"></bean>
+	<bean class="com.moveone.app.ioc.Robot" id="robot">
+		<constructor-arg type="com.moveone.app.ioc.LeftArm" ref="leftArm"></constructor-arg>
+		<constructor-arg type="com.moveone.app.ioc.RightArm" ref="rightArm"></constructor-arg>
+		
+		<!-- setter Name -->
+		<property name="leftArm" ref="leftArm"></property>
+		<property name="rightArm" ref="rightArm"></property>
+	</bean>	
 </beans>

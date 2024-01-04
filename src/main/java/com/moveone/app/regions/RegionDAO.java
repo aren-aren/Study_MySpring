@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.studyservlet.app.util.DBConnector;
 
+@Repository
 public class RegionDAO {
 	
 	public int update(RegionDTO regionDTO) throws Exception {
