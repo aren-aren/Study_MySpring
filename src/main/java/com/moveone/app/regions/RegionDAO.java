@@ -51,7 +51,7 @@ public class RegionDAO {
 	}
 
 	public List<RegionDTO> getList() throws Exception {
-		return null;
+		return sqlSession.selectList(namespace + "getList");
 	}
 	
 	public RegionDTO getDetail(RegionDTO dto) throws Exception {

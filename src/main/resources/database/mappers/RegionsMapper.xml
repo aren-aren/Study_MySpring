@@ -12,4 +12,9 @@
 	<select id="getDetail" resultType="com.moveone.app.regions.RegionDTO" parameterType="com.moveone.app.regions.RegionDTO">
 		SELECT * FROM REGIONS WHERE REGION_ID=#{region_id}
 	</select>
+	
+	<!-- list -->
+	<select id="getList" resultType="com.moveone.app.regions.RegionDTO">
+		SELECT * FROM REGIONS
+	</select>
 </mapper>

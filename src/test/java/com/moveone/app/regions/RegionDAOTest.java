@@ -2,6 +2,8 @@ package com.moveone.app.regions;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,4 +24,10 @@ public class RegionDAOTest extends MyTest {
 		assertNotNull(regionDTO);
 	}
 
+	@Test
+	public void getListTest() throws Exception {
+		List<RegionDTO> list = regionDAO.getList();
+		
+		assertNotEquals(0, list.size());
+	}
 }
