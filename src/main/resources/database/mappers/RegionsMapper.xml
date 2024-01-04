@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- Mapper의 namespace는 비우면 error -->
+  <!-- namespace의 값은 중복 X -->
+  <!-- 해당 mapper를 사용할 DAO의 풀패키지명으로 작성 -->
+<mapper namespace="com.moveone.app.regions.RegionDAO">
+	<!-- detail -->
+	<!-- id값은 dao의 메서드명 -->
+	<select id="getDetail" resultType="com.moveone.app.regions.RegionDTO" parameterType="com.moveone.app.regions.RegionDTO">
+		SELECT * FROM REGIONS WHERE REGION_ID=#{region_id}
+	</select>
+</mapper>

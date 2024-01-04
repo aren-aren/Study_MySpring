@@ -6,12 +6,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.studyservlet.app.util.DBConnector;
 
 @Repository
 public class RegionDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	private final String namespace = "com.moveone.app.regions.RegionDAO.";
 	
 	public int update(RegionDTO regionDTO) throws Exception {
 		Connection con = DBConnector.getConnector();
@@ -46,44 +51,11 @@ public class RegionDAO {
 	}
 
 	public List<RegionDTO> getList() throws Exception {
-		Connection con = DBConnector.getConnector();
-		
-		String sql = "SELECT * FROM REGIONS";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		
-		List<RegionDTO> regions = new ArrayList<RegionDTO>();
-		
-		while(rs.next()) {
-			RegionDTO dto = new RegionDTO();
-			dto.setRegion_id(rs.getInt("REGION_ID"));
-			dto.setRegion_name(rs.getString("REGION_NAME"));
-			regions.add(dto);
-		}
-		
-		DBConnector.disConnect(rs, st, con);
-	
-		return regions;
+		return null;
 	}
 	
 	public RegionDTO getDetail(RegionDTO dto) throws Exception {
-		Connection con = DBConnector.getConnector();
-		String sql = "SELECT * FROM REGIONS WHERE REGION_ID = ?";
-		//name
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setInt(1, dto.getRegion_id());
-		
-		ResultSet rs = st.executeQuery();
-		
-		RegionDTO regionDTO = null;
-		if(rs.next()) {
-			regionDTO = new RegionDTO();
-			regionDTO.setRegion_id(rs.getInt("REGION_ID"));
-			regionDTO.setRegion_name(rs.getString("REGION_NAME"));
-		}
-		
-		return regionDTO;
+		return sqlSession.selectOne(namespace + "getDetail", dto);
 	}
 	
 }

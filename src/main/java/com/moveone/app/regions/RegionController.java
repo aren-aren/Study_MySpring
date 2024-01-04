@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegionController {
 	
 	@Autowired
-	private RegionDAO dao;
+	private RegionService regionService;
 	
 //	public RegionController() {
 //		this.dao = new RegionDAO();
@@ -25,10 +25,10 @@ public class RegionController {
 	
 	@RequestMapping(value="add", method=RequestMethod.POST)
 	public String add(RegionDTO dto, Model model) throws Exception {
-		int result = dao.add(dto);
+		//int result = regionService.add(dto);
 		
 		String msg = "등록 실패";
-		if(result > 0) {
+		if ( false ){//result > 0 ) {
 			//성공
 			msg = "등록성공";
 		}
@@ -53,7 +53,7 @@ public class RegionController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<RegionDTO> list = dao.getList();
+		List<RegionDTO> list = regionService.getList();
 		
 //		request.setAttribute("list", list);
 		mv.addObject("list", list);
@@ -68,7 +68,7 @@ public class RegionController {
 		
 		dto.setRegion_id(region_id);
 		
-		dto = dao.getDetail(dto);
+		//dto = regionService.getDetail(dto);
 		//request.setAttribute("dto", dto);
 		//Model과 request의 라이프사이클이 동일
 		model.addAttribute("dto", dto);
