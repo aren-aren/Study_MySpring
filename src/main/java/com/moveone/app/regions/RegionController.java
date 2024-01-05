@@ -61,4 +61,45 @@ public class RegionController {
 		
 		return "regions/detail";
 	}
+	
+	@RequestMapping(value="delete", method=RequestMethod.POST)
+	public String delete(RegionDTO regionDTO, Model model) throws Exception {
+		int result = regionService.delete(regionDTO);
+		
+		String msg = regionDTO.getRegion_id() +  " : 삭제 실패";
+		if (result > 0 ) {
+			msg = regionDTO.getRegion_id() +  " : " + result + " 개 삭제 성공";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("path", "./list");
+		
+		return "commons/result";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String update(RegionDTO regionDTO, Model model) throws Exception {
+		regionDTO = regionService.getDetail(regionDTO);
+		
+		model.addAttribute("dto", regionDTO);
+		
+		return "regions/update";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public ModelAndView update(RegionDTO regionDTO, ModelAndView mv) throws Exception {
+		int result = regionService.update(regionDTO);
+		
+		String msg = regionDTO.getRegion_id() +  " : 수정 실패";
+		if (result > 0 ) {
+			msg = regionDTO.getRegion_id() +  " : 수정 성공";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("path", "./list");
+		
+		mv.setViewName("commons/result");
+		
+		return mv;
+	}
 }

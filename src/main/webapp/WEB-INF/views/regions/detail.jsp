@@ -15,6 +15,11 @@
 			<c:if test="${not empty dto}">
 				<h3>${ dto.region_id }</h3>
 				<div>${ dto.region_name }</div>
+				<button id="up" data-region-id="${dto.region_id}">Update</button>
+				<button id="del">Delete</button>
+				<form id="frm" action="./delete" method="post">
+					<input type="hidden" name="region_id" value="${dto.region_id}">
+				</form>
 			</c:if>
 			<c:if test="${empty dto }">
 				<h3>없는 번호입니다.</h3>
@@ -23,5 +28,6 @@
 	</section>
 
 <c:import url="../templates/bootstrap_js.jsp"></c:import>
+<script src="../resources/Js/regionDetail.js"></script>
 </body>
 </html>
