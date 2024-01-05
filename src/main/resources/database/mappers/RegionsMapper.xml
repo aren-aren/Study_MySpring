@@ -9,12 +9,24 @@
 <mapper namespace="com.moveone.app.regions.RegionDAO">
 	<!-- detail -->
 	<!-- id값은 dao의 메서드명 -->
-	<select id="getDetail" resultType="com.moveone.app.regions.RegionDTO" parameterType="com.moveone.app.regions.RegionDTO">
+	<select id="getDetail" resultType="RegionDTO" parameterType="RegionDTO">
 		SELECT * FROM REGIONS WHERE REGION_ID=#{region_id}
 	</select>
 	
 	<!-- list -->
-	<select id="getList" resultType="com.moveone.app.regions.RegionDTO">
+	<select id="getList" resultType="RegionDTO">
 		SELECT * FROM REGIONS
 	</select>
+	
+	<insert id="add" parameterType="RegionDTO">
+		INSERT INTO REGIONS VALUES (EMPLOYEES_SEQ.NEXTVAL, #{region_name})
+	</insert>
+	
+	<update id="update" parameterType="RegionDTO">
+		UPDATE REGIONS SET REGION_NAME=#{region_name} WHERE REGION_ID=#{region_id}
+	</update>
+	
+	<delete id="delete" parameterType="RegionDTO">
+		DELETE REGIONS WHERE REGION_ID=#{region_id}
+	</delete>
 </mapper>

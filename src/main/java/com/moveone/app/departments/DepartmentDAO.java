@@ -9,16 +9,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DepartmentDAO {
 	@Autowired
-	SqlSession sqlSession;
-	String namespace = "com.moveone.app.departments.DepartmentDAO.";
+	private SqlSession sqlSession;
+	private final String namespace = "com.moveone.app.departments.DepartmentDAO.";
 	
 	public int update(DepartmentDTO dto) throws Exception {
-		
-		return 0;
+		return sqlSession.update(namespace+"update", dto);
 	}
 	
 	public int add(DepartmentDTO dto) throws Exception {
-		return 0;
+		return sqlSession.insert(namespace + "add", dto);
 	}
 	
 	public List<DepartmentDTO> getList() throws Exception {
@@ -27,5 +26,9 @@ public class DepartmentDAO {
 	
 	public DepartmentDTO getDetail(DepartmentDTO dto) throws Exception {
 		return sqlSession.selectOne(namespace + "getDetail", dto);
+	}
+	
+	public int delete(DepartmentDTO departmentDTO) throws Exception {
+		return sqlSession.delete(namespace+"delete", departmentDTO);
 	}
 }

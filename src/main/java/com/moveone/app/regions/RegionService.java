@@ -18,4 +18,19 @@ public class RegionService {
 		return list;
 	}
 	
+	public RegionDTO getDetail(RegionDTO regionDTO) throws Exception {
+		return regionDAO.getDetail(regionDTO);
+	}
+	
+	public int add(RegionDTO regionDTO) throws Exception {
+		return regionDAO.add(regionDTO);
+	}
+	
+	public int update(RegionDTO regionDTO) throws Exception {
+		return regionDAO.update(regionDTO);
+	}
+	
+	public int delete(RegionDTO regionDTO) throws Exception {
+		return regionDAO.delete(regionDTO);
+	}
 }

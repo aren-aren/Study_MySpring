@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- Mapper의 namespace는 비우면 error -->
+<mapper namespace="com.moveone.app.countries.CountryDAO">
+
+	<select id="getList" resultType="CountryDTO">
+		SELECT * FROM COUNTRIES
+	</select>
+	
+</mapper>

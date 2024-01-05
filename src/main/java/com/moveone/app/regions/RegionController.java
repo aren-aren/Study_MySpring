@@ -19,22 +19,14 @@ public class RegionController {
 	@Autowired
 	private RegionService regionService;
 	
-//	public RegionController() {
-//		this.dao = new RegionDAO();
-//	}
-	
 	@RequestMapping(value="add", method=RequestMethod.POST)
 	public String add(RegionDTO dto, Model model) throws Exception {
-		//int result = regionService.add(dto);
+		int result = regionService.add(dto);
 		
 		String msg = "등록 실패";
-		if ( false ){//result > 0 ) {
-			//성공
+		if (result > 0 ) {
 			msg = "등록성공";
 		}
-		
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("path", "./list"); 
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("path", "./list");
@@ -55,7 +47,6 @@ public class RegionController {
 		
 		List<RegionDTO> list = regionService.getList();
 		
-//		request.setAttribute("list", list);
 		mv.addObject("list", list);
 		mv.setViewName("regions/list");
 		return mv;
@@ -63,14 +54,9 @@ public class RegionController {
 	
 	@RequestMapping(value="detail", method=RequestMethod.GET)
 	//파라미터의 이름과 타입을 동일하게 선언
-	public String detail(Integer region_id, Model model) throws Exception {
-		RegionDTO dto = new RegionDTO();
+	public String detail(RegionDTO dto, Model model) throws Exception {
 		
-		dto.setRegion_id(region_id);
-		
-		//dto = regionService.getDetail(dto);
-		//request.setAttribute("dto", dto);
-		//Model과 request의 라이프사이클이 동일
+		dto = regionService.getDetail(dto);
 		model.addAttribute("dto", dto);
 		
 		return "regions/detail";
