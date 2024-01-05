@@ -2,6 +2,7 @@ package com.moveone.app.product;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,15 +27,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value="/products/*")
 public class ProductController {
-	ProductDAO productDAO;
 	
-	public ProductController() {
-		productDAO = new ProductDAO();
-	}
+	@Autowired
+	ProductService productService;
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String list(Model model) throws Exception {
-		List<ProductDTO> list = productDAO.getList();
+		List<ProductDTO> list = productService.getList();
 		model.addAttribute("list", list);
 		
 		return "products/list";
@@ -45,7 +44,7 @@ public class ProductController {
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setProductNum(productNum);
 		
-		productDTO = productDAO.getDetail(productDTO);
+		productDTO = productService.getDetail(productDTO);
 		
 		model.addAttribute("dto", productDTO);
 		

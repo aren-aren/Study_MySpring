@@ -6,50 +6,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.studyservlet.app.util.DBConnector;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ProductDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	private final String namespace = "com.moveone.app.product.ProductDAO.";
 	
 	public List<ProductDTO> getList() throws Exception{
-		Connection con = DBConnector.getConnector();
-		String sql = "SELECT * FROM PRODUCT";
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		List<ProductDTO> ar = new ArrayList<ProductDTO>();
-		while(rs.next()) {
-			
-			ProductDTO dto = new ProductDTO();
-			dto.setProductNum(rs.getLong("productNum"));
-			dto.setProductName(rs.getString("productName"));
-			dto.setProductContents(rs.getString("productContents"));
-			dto.setProductRate(rs.getDouble("productRate"));
-			dto.setProductJumsu(rs.getDouble("productJumsu"));
-			ar.add(dto);
-		}
-		
-		DBConnector.disConnect(rs, st, con);
-		
-		return ar;
+		return sqlSession.selectList(namespace + "getList");
 	}
 	
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception {
-		Connection con = DBConnector.getConnector();
-		String sql = "SELECT * FROM PRODUCT WHERE PRODUCTNUM = ?";
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setLong(1, productDTO.getProductNum());
-		
-		ResultSet rs = st.executeQuery();
-		rs.next();
-		productDTO.setProductContents(rs.getString("productContents"));
-		productDTO.setProductJumsu(rs.getDouble("productJumsu"));
-		productDTO.setProductName(rs.getString("productName"));
-		productDTO.setProductNum(rs.getLong("productNum"));
-		productDTO.setProductRate(rs.getDouble("productRate"));
-		
-		DBConnector.disConnect(rs, st, con);
-		
-		
-		return productDTO;
+		return sqlSession.selectOne(namespace + "getDetail", productDTO);
 	}
 	
 	public Integer addProduct(ProductDTO productDTO) {
