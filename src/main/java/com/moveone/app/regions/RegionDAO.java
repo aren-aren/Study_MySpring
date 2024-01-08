@@ -1,16 +1,12 @@
 package com.moveone.app.regions;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.studyservlet.app.util.DBConnector;
+import com.moveone.app.util.Pager;
 
 @Repository
 public class RegionDAO {
@@ -26,8 +22,8 @@ public class RegionDAO {
 		return sqlSession.insert(namespace + "add", regionDTO);
 	}
 
-	public List<RegionDTO> getList() throws Exception {
-		return sqlSession.selectList(namespace + "getList");
+	public List<RegionDTO> getList(Pager pager) throws Exception {
+		return sqlSession.selectList(namespace + "getList", pager);
 	}
 	
 	public RegionDTO getDetail(RegionDTO dto) throws Exception {

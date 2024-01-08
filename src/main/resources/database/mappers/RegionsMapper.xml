@@ -14,8 +14,15 @@
 	</select>
 	
 	<!-- list -->
-	<select id="getList" resultType="RegionDTO">
-		SELECT * FROM REGIONS
+	<select id="getList" parameterType="Pager" resultType="RegionDTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM R, RG.*
+			FROM ( 
+				SELECT * FROM REGIONS ORDER BY REGION_ID DESC 
+				) RG
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<insert id="add" parameterType="RegionDTO">

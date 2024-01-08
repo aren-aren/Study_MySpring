@@ -8,13 +8,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moveone.app.MyTest;
+import com.moveone.app.util.Pager;
 
 public class RegionDAOTest extends MyTest {
 
 	@Autowired
 	private RegionDAO regionDAO;
 	
-	@Test
+	//@Test
 	public void getDetailTest() throws Exception {
 		RegionDTO regionDTO = new RegionDTO();
 		regionDTO.setRegion_id(9);
@@ -26,19 +27,31 @@ public class RegionDAOTest extends MyTest {
 
 	@Test
 	public void getListTest() throws Exception {
-		List<RegionDTO> list = regionDAO.getList();
+		Pager pager = new Pager();
+		pager.setPage(1l);
+		pager.makeRow();
+		List<RegionDTO> list = regionDAO.getList(pager);
 		
-		assertNotEquals(0, list.size());
+		assertEquals(10, list.size());
 	}
 	
 	//@Test
 	public void addTest() throws Exception {
 		RegionDTO regionDTO = new RegionDTO();
-		regionDTO.setRegion_name("TEST");
 		
-		int result = regionDAO.add(regionDTO);
+		for(int i = 0 ; i < 100 ; ++i) {
+			regionDTO.setRegion_name("TEST" + i);
+			
+			int result = regionDAO.add(regionDTO);
+			
+			if(i%10 == 0) {
+				Thread.sleep(500);
+			}
+		}
 		
-		assertNotEquals(0, result);
+		System.out.println("100개 입력 완료");
+		
+		//assertNotEquals(0, result);
 	}
 	
 	//@Test

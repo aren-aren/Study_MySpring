@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moveone.app.util.Pager;
+
 @Controller
 @RequestMapping(value="/regions/*")
 public class RegionController {
@@ -40,12 +42,11 @@ public class RegionController {
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ModelAndView list() throws Exception {
+	public ModelAndView list(Pager pager) throws Exception {
 		System.out.println("Regions List");
 		
 		ModelAndView mv = new ModelAndView();
-		
-		List<RegionDTO> list = regionService.getList();
+		List<RegionDTO> list = regionService.getList(pager);
 		
 		mv.addObject("list", list);
 		mv.setViewName("regions/list");
