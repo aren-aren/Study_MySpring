@@ -37,7 +37,8 @@ public class RegionDAOTest extends MyTest {
 	
 	@Test
 	public void getTotalTest() throws Exception {
-		long total = regionDAO.getTotal();
+		Pager pager = new Pager();
+		long total = regionDAO.getTotal(pager);
 		
 		long totalPage = (long) Math.ceil(100/10);
 		
