@@ -10,5 +10,7 @@
 		<typeAlias type="com.moveone.app.countries.CountryDTO" alias="CountryDTO"/>
 		
 		<typeAlias type="com.moveone.app.util.Pager" alias="Pager"/>
+		
+		<typeAlias type="java.lang.Long" alias="Long"/>
 	</typeAliases>
 </configuration>

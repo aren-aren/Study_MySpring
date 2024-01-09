@@ -15,8 +15,14 @@ public class RegionService {
 	private RegionDAO regionDAO;
 	
 	public List<RegionDTO> getList(Pager pager) throws Exception {
-		List<RegionDTO> list = regionDAO.getList(pager);
+		pager.makeRow();
+	 	Long totalCount = regionDAO.getTotal();
+	 	if(totalCount == null) {
+	 		totalCount = 0L;
+	 	}
+		pager.makeNum(totalCount);
 		
+		List<RegionDTO> list = regionDAO.getList(pager);
 		return list;
 	}
 	

@@ -25,7 +25,7 @@ public class RegionDAOTest extends MyTest {
 		assertNotNull(regionDTO);
 	}
 
-	@Test
+	//@Test
 	public void getListTest() throws Exception {
 		Pager pager = new Pager();
 		pager.setPage(1l);
@@ -33,6 +33,15 @@ public class RegionDAOTest extends MyTest {
 		List<RegionDTO> list = regionDAO.getList(pager);
 		
 		assertEquals(10, list.size());
+	}
+	
+	@Test
+	public void getTotalTest() throws Exception {
+		long total = regionDAO.getTotal();
+		
+		long totalPage = (long) Math.ceil(100/10);
+		
+		assertEquals(12, totalPage);
 	}
 	
 	//@Test

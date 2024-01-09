@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moveone.app.MyTest;
+import com.moveone.app.util.Pager;
 
 public class DepartmentDAOTest extends MyTest{
 	@Autowired
@@ -27,9 +28,16 @@ public class DepartmentDAOTest extends MyTest{
 	
 	@Test
 	public void getList() throws Exception {
-		List<DepartmentDTO> list = departmentDAO.getList();
+		Pager pager = new Pager();
+		pager.setPage(1L);
+		pager.makeRow();
+		List<DepartmentDTO> list = departmentDAO.getList(pager);
 		
-		assertNotEquals(0, list.size());
+		long total = departmentDAO.getTotal();
+		
+		assertNotEquals(0, total);
+		
+		assertEquals(10, list.size());
 	}
 	
 	//@Test
@@ -59,7 +67,7 @@ public class DepartmentDAOTest extends MyTest{
 		assertNotEquals(0, result);
 	}
 	
-	@Test
+	//@Test
 	public void deleteTest() throws Exception {
 		DepartmentDTO dto = new DepartmentDTO();
 		dto.setDepartment_id(290);

@@ -34,4 +34,8 @@ public class RegionDAO {
 		return sqlSession.delete(namespace+"delete", regionDTO);
 	}
 	
+	public Long getTotal() throws Exception {
+		return sqlSession.selectOne(namespace + "getTotal");
+	}
+	
 }

@@ -11,7 +11,18 @@
 	</select>
 	
 	<select id="getList" resultType="DepartmentDTO">
-		SELECT * FROM DEPARTMENTS
+		SELECT * 
+		FROM (
+			SELECT ROWNUM R, DP.*
+			FROM ( 
+				SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_ID DESC 
+				) DP
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="getTotal" resultType="java.lang.Long">
+		SELECT COUNT(*) FROM DEPARTMENTS
 	</select>
 	
 	<insert id="add" parameterType="DepartmentDTO">

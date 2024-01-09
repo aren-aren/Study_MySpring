@@ -7,6 +7,10 @@
   <!-- namespace의 값은 중복 X -->
   <!-- 해당 mapper를 사용할 DAO의 풀패키지명으로 작성 -->
 <mapper namespace="com.moveone.app.regions.RegionDAO">
+	<select id="getTotal" resultType="Long">
+		SELECT COUNT(REGION_ID) FROM REGIONS
+	</select>
+
 	<!-- detail -->
 	<!-- id값은 dao의 메서드명 -->
 	<select id="getDetail" resultType="RegionDTO" parameterType="RegionDTO">

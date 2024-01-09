@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.moveone.app.util.Pager;
+
 @Repository
 public class DepartmentDAO {
 	@Autowired
@@ -20,8 +22,8 @@ public class DepartmentDAO {
 		return sqlSession.insert(namespace + "add", dto);
 	}
 	
-	public List<DepartmentDTO> getList() throws Exception {
-		return sqlSession.selectList(namespace + "getList");
+	public List<DepartmentDTO> getList(Pager pager) throws Exception {
+		return sqlSession.selectList(namespace + "getList", pager);
 	}
 	
 	public DepartmentDTO getDetail(DepartmentDTO dto) throws Exception {
@@ -30,5 +32,9 @@ public class DepartmentDAO {
 	
 	public int delete(DepartmentDTO departmentDTO) throws Exception {
 		return sqlSession.delete(namespace+"delete", departmentDTO);
+	}
+
+	public Long getTotal() {
+		return sqlSession.selectOne(namespace + "getTotal");
 	}
 }
