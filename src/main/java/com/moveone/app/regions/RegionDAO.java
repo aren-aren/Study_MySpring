@@ -21,6 +21,10 @@ public class RegionDAO {
 	public int add(RegionDTO regionDTO) throws Exception {
 		return sqlSession.insert(namespace + "add", regionDTO);
 	}
+	
+	public int addFile(RegionFileDTO fileDTO) throws Exception {
+		return sqlSession.insert(namespace + "addFile", fileDTO);
+	}
 
 	public List<RegionDTO> getList(Pager pager) throws Exception {
 		return sqlSession.selectList(namespace + "getList", pager);
@@ -37,5 +41,6 @@ public class RegionDAO {
 	public Long getTotal(Pager pager) throws Exception {
 		return sqlSession.selectOne(namespace + "getTotal", pager);
 	}
+	
 	
 }

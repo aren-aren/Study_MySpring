@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.moveone.app.util.Pager;
@@ -22,8 +23,11 @@ public class RegionController {
 	private RegionService regionService;
 	
 	@RequestMapping(value="add", method=RequestMethod.POST)
-	public String add(RegionDTO dto, Model model) throws Exception {
-		int result = regionService.add(dto);
+	public String add(RegionDTO dto, Model model, MultipartFile photo) throws Exception {
+		int result = regionService.add(dto, photo);
+		
+		System.out.println(photo.getName());
+		System.out.println(photo.getOriginalFilename());
 		
 		String msg = "등록 실패";
 		if (result > 0 ) {

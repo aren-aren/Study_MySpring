@@ -26,6 +26,9 @@
 		WHERE REGION_NAME LIKE '%'||#{search}||'%'
 	</sql>
 	
+	<insert id="addFile" parameterType="RegionFileDTO">
+		INSERT INTO REGIONFILES VALUES (REGIONFILES_SEQ.NEXTVAL, #{region_id}, #{fileName}, #{oriName})
+	</insert>
 
 	<select id="getTotal" parameterType="Pager" resultType="Long">
 		SELECT COUNT(REGION_ID) FROM REGIONS
@@ -54,7 +57,10 @@
 	</select>
 	
 	<insert id="add" parameterType="RegionDTO">
-		INSERT INTO REGIONS VALUES (EMPLOYEES_SEQ.NEXTVAL, #{region_name})
+		<selectKey keyProperty="region_id" order="BEFORE" resultType="Long">
+			SELECT EMPLOYEES_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO REGIONS VALUES (#{region_id}, #{region_name})
 	</insert>
 	
 	<update id="update" parameterType="RegionDTO">

@@ -8,6 +8,7 @@
 		<typeAlias type="com.moveone.app.regions.RegionDTO" alias="RegionDTO"/>
 		<typeAlias type="com.moveone.app.departments.DepartmentDTO" alias="DepartmentDTO"/>
 		<typeAlias type="com.moveone.app.countries.CountryDTO" alias="CountryDTO"/>
+		<typeAlias type="com.moveone.app.regions.RegionFileDTO" alias="RegionFileDTO"/>
 		
 		<typeAlias type="com.moveone.app.util.Pager" alias="Pager"/>
 		

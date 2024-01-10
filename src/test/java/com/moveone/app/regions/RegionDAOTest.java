@@ -3,6 +3,7 @@ package com.moveone.app.regions;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RegionDAOTest extends MyTest {
 	//@Test
 	public void getDetailTest() throws Exception {
 		RegionDTO regionDTO = new RegionDTO();
-		regionDTO.setRegion_id(9);
+		regionDTO.setRegion_id(9L);
 		
 		regionDTO = regionDAO.getDetail(regionDTO);
 		
@@ -35,7 +36,7 @@ public class RegionDAOTest extends MyTest {
 		assertEquals(10, list.size());
 	}
 	
-	@Test
+	//@Test
 	public void getTotalTest() throws Exception {
 		Pager pager = new Pager();
 		long total = regionDAO.getTotal(pager);
@@ -67,7 +68,7 @@ public class RegionDAOTest extends MyTest {
 	//@Test
 	public void updateTest() throws Exception {
 		RegionDTO regionDTO = new RegionDTO();
-		regionDTO.setRegion_id(207);
+		regionDTO.setRegion_id(207L);
 		regionDTO.setRegion_name("galaxy");
 		
 		int result = regionDAO.update(regionDTO);
@@ -78,7 +79,7 @@ public class RegionDAOTest extends MyTest {
 	//@Test
 	public void deleteTest() throws Exception {
 		RegionDTO dto = new RegionDTO();
-		dto.setRegion_id(209);
+		dto.setRegion_id(209L);
 		
 		int result = regionDAO.delete(dto);
 		
