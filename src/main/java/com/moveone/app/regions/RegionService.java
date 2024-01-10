@@ -45,10 +45,12 @@ public class RegionService {
 		/*
 		 * pom.xml -> commons fileupload
 		 * jsp form -> enctype="multipart/form-data"
+		 * -context.xml -> MultipartResolver를 생성해주도록 Bean으로 등록
 		 * controller -> MultipartFile로 file을 받음
 		 * 
 		 * 먼저 region을 insert후 region_id를 받아옴
-		 * 파일의 경로, 파일 이름(중복을 피하기 위해 calendar 또는 UUID 사용), 파일을 경로에 저장
+		 * 파일의 경로, 파일 이름(중복을 피하기 위해 calendar 또는 UUID 사용)을 이용하여 File 생성
+		 * FileCopyUtils을 사용하여 경로에 파일 저장
 		 * FileDTO에 필요한 정보들과 region_id를 저장후 insert
 		 * 
 		 * 다수의 매개변수를 받을 경우 배열로 받음
