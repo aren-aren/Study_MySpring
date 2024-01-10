@@ -42,6 +42,18 @@ public class RegionService {
 	}
 	
 	public int add(RegionDTO regionDTO, MultipartFile file) throws Exception {
+		/*
+		 * pom.xml -> commons fileupload
+		 * jsp form -> enctype="multipart/form-data"
+		 * controller -> MultipartFile로 file을 받음
+		 * 
+		 * 먼저 region을 insert후 region_id를 받아옴
+		 * 파일의 경로, 파일 이름(중복을 피하기 위해 calendar 또는 UUID 사용), 파일을 경로에 저장
+		 * FileDTO에 필요한 정보들과 region_id를 저장후 insert
+		 * 
+		 * 다수의 매개변수를 받을 경우 배열로 받음
+		 *  -> String[] ch (name이 ch인 checkbox를 통해 매개변수를 입력받았다면 다수의 값이 올 수 있으니 배열로 받음)
+		 */
 		int result = regionDAO.add(regionDTO);
 		
 		System.out.println("result : " + result);
