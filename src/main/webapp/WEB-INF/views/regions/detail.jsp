@@ -15,6 +15,10 @@
 			<c:if test="${not empty dto}">
 				<h3>${ dto.region_id }</h3>
 				<div>${ dto.region_name }</div>
+				<div>
+					<h2>File</h2>
+					<a href="/resources/upload/regions/${dto.regionFileDTO.fileName}">${dto.regionFileDTO.oriName}</a>
+				</div>
 				<button id="up" data-region-id="${dto.region_id}">Update</button>
 				<button id="del">Delete</button>
 				<form id="frm" action="./delete" method="post">

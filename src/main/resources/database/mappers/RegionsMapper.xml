@@ -37,9 +37,25 @@
 
 	<!-- detail -->
 	<!-- id값은 dao의 메서드명 -->
-	<select id="getDetail" resultType="RegionDTO" parameterType="RegionDTO">
-		SELECT * FROM REGIONS WHERE REGION_ID=#{region_id}
+	<select id="getDetail" resultMap="getDetailResult" parameterType="RegionDTO">
+		SELECT *
+		FROM REGIONS R
+			LEFT OUTER JOIN REGIONFILES RF USING (REGION_ID)
+		WHERE REGION_ID = #{region_id}
 	</select>
+	
+	<resultMap type="RegionDTO" id="getDetailResult">
+		<!-- ID : PK -->
+		<id column="REGION_ID" property="region_id"/>
+		<!-- result : pk외의 나머지 -->
+		<result column="RESION_NAME" property="region_name"/>
+		<!-- 1:1 -->
+		<association property="regionFileDTO" javaType="RegionFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>			
+		</association>
+	</resultMap>
 	
 	<!-- list -->
 	<select id="getList" parameterType="Pager" resultType="RegionDTO">

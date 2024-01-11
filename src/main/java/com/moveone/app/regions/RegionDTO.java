@@ -8,6 +8,7 @@ public class RegionDTO {
 	
 	private Long region_id;
 	private String region_name;
+	private RegionFileDTO regionFileDTO;
 	
 	public Long getRegion_id() {
 		return region_id;
@@ -21,5 +22,12 @@ public class RegionDTO {
 	public void setRegion_name(String region_name) {
 		this.region_name = region_name;
 	}
+	public RegionFileDTO getRegionFileDTO() {
+		return regionFileDTO;
+	}
+	public void setRegionFileDTO(RegionFileDTO regionFileDTO) {
+		this.regionFileDTO = regionFileDTO;
+	}
+	
 	
 }

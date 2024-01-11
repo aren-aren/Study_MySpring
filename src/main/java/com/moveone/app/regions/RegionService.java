@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.moveone.app.util.FileManager;
 import com.moveone.app.util.Pager;
 
 //DAO의 전처리, 후처리
@@ -20,10 +21,11 @@ public class RegionService {
 	
 	@Autowired
 	private RegionDAO regionDAO;
-	
 	@Autowired
 	//내장 객체 중에서 application
 	private ServletContext servletContext;
+	@Autowired
+	private FileManager fileManager;
 	
 	public List<RegionDTO> getList(Pager pager) throws Exception {
 		pager.makeRow();
@@ -61,27 +63,10 @@ public class RegionService {
 		System.out.println("result : " + result);
 		
 		// 1. 어디에 저장?
-		String path = servletContext.getRealPath("/resources/upload");
+		String path = servletContext.getRealPath("/resources/upload/regions");
 		System.out.println(path);
 		
-		File f = new File(path, "regions");
-		
-		if(!f.exists()) {
-			f.mkdirs();
-		}
-		// 2. 어떤 파일 명으로 저장
-		// a. 시간 사용
-		Calendar ca = Calendar.getInstance();
-		String filename = ca.getTimeInMillis() + "_" + file.getOriginalFilename();
-		
-		// b. UUID 사용(universal unique identity)
-		filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-		System.out.println(filename);
-		
-		// 3. 파일을 저장
-		// a. FileCopyUtils 클래스 사용
-		f = new File(f,filename);
-		FileCopyUtils.copy(file.getBytes(), f);
+		String filename = fileManager.fileSave(path, file);
 		
 		// 4. DB에 정보를 저장
 		RegionFileDTO fileDTO = new RegionFileDTO();
