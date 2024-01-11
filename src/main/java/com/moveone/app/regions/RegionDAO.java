@@ -38,6 +38,10 @@ public class RegionDAO {
 		return sqlSession.delete(namespace+"delete", regionDTO);
 	}
 	
+	public List<RegionFileDTO> getListFiles(RegionDTO regionDTO) throws Exception {
+		return sqlSession.selectList(namespace + "getListFiles", regionDTO);
+	}
+	
 	public Long getTotal(Pager pager) throws Exception {
 		return sqlSession.selectOne(namespace + "getTotal", pager);
 	}
